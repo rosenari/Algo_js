@@ -1,49 +1,34 @@
-//프로그래머스 LEVEL3
-
 function solution(genres, plays) {
-    var answer = [];
-    let map = [];
-    genres = genres.map((v) => '_' + v);
-
-    genres.forEach((v, i) => {
-        if (!map[v]) map[v] = plays[i];
-        else map[v] += plays[i];
-    });
-
-
-    let song = [];
-    plays.forEach((v, i) => {
-        song.push([map[genres[i]], v, i, genres[i]]);
-    });
-
-    song.sort((a, b) => {
-        if (b[0] - a[0] > 0) {
-            return 1;
-        } else if (b[0] - a[0] < 0) {
-            return -1;
-        } else {
-            if (b[1] - a[1] > 0) {
-                return 1;
-            } else if (b[1] - a[1] < 0) {
-                return -1;
-            } else {
-                return a[2] - b[2];
+    let genrePlays = {};
+    let indexs = [];
+    
+    //장르별 플레이수 기록
+    for(let key in genres){
+        let genre = genres[key];
+        if(!genrePlays[genre]) genrePlays[genre] = plays[key];
+        else genrePlays[genre]+=plays[key];
+        
+        indexs.push(key);
+    }
+    
+    indexs.sort((a,b)=> {
+        if(genrePlays[genres[a]]==genrePlays[genres[b]]){
+            if(plays[a]==plays[b]){
+                return a - b;
+            }else{
+                return plays[b] - plays[a];
             }
+        }else{
+            return genrePlays[genres[b]] - genrePlays[genres[a]];
         }
     });
-
-    let before = '';
-    let cnt = 0;
-    while (song.length > 0) {
-        let s = song.shift();
-
-        if (before == s[3]) cnt++;
-        else cnt = 0;
-
-        if (cnt < 2) answer.push(s[2]);
-
-        before = s[3];
+    
+    let answer = [];
+    for(let index of indexs){
+        if(answer.length > 1 && genres[index] == genres[answer[answer.length-1]]
+              && genres[index] == genres[answer[answer.length-2]]) continue;       
+        else answer.push(parseInt(index));        
     }
-
+    
     return answer;
 }
