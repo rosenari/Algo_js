@@ -1,22 +1,12 @@
-//프로그래머스 LEVEL2
-
 function solution(progresses, speeds) {
-    var answer = [];
-    let queue = [];
-    progresses.forEach((v, i) => {
-        queue.push(Math.ceil((100 - v) / speeds[i]));
-    })
-
-    let max = queue.shift();
-    answer.push(1);
-    while (queue.length > 0) {
-        let v = queue.shift();
-        if (v <= max) answer[answer.length - 1]++;
-        else {
-            max = v;
-            answer.push(1);
-        }
+    let arr = [];
+    for(let i=0;i<progresses.length;i++){
+        let remain = Math.ceil((100-progresses[i])/speeds[i]);
+        if(arr.length > 0 && arr[arr.length-1][0]>=remain) arr[arr.length-1][1]+=1;
+        else arr.push([remain,1]);
     }
-
+    let answer = [];
+    for(let i=0;i<arr.length;i++) answer.push(arr[i][1]);
+    
     return answer;
 }
