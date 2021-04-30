@@ -1,17 +1,7 @@
-//프로그래머스 LEVEL2
-
 function solution(brown, yellow) {
-    var answer = [];
-
-    for (let i = 1; i <= brown; i++) {
-        for (let j = 1; j <= i; j++) {
-            if (i * j == brown + yellow && ((i * 2) + (j * 2) - 4) == brown) {
-                answer.push(i);
-                answer.push(j);
-                return answer;
-            }
+    for(let w=1;w<=parseInt(brown/2);w++){
+        for(let h=1;h<=w;h++){
+            if(w*h==brown+yellow && (w+h)*2-4==brown) return [w,h];
         }
     }
-
-    return answer;
 }
