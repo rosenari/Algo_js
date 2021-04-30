@@ -1,52 +1,45 @@
-//프로그래머스 LEVEL2
-//해시,에라토스테네스의 체,DFS(완탐)-nPr 사용
-
+let sets = new Set();
+let map = {};
 function solution(numbers) {
-    numbers = Array.from(numbers);
-
-    for (let i = 1; i <= numbers.length; i++)
-        nPr(0, i, numbers, new Array(numbers.length).fill(false), new Array());
-
-    return answer;
+    let N = numbers.length;
+    let v = new Array(N);
+    numbers = numbers.split("");
+    for(let i=1;i<=N;i++){
+        v.fill(false);
+        Permutation(0,i,"",numbers,v);
+    }
+    return sets.size;
 }
 
-let map = [];
-let answer = 0;
-let nPr = (cnt, target, numbers, v, num) => {
-    if (cnt == target) {
-        let result = parseInt(num.join(''));
-        if (map[result] !== undefined) return;
-
-        map[result] = true;
-        if (isPrime(result)) answer++;
-
+function Permutation(cnt,target,num,numbers,v){
+    if(cnt==target){
+        if(!map[parseInt(num)]) map[parseInt(num)] = true;
+        else return;
+            
+        if(isPrime(parseInt(num))) sets.add(parseInt(num));
         return;
     }
-
-    for (let i = 0; i < numbers.length; i++) {
-        if (v[i]) continue;
+    
+    for(let i=0;i<numbers.length;i++){
+        if(v[i]) continue;
         v[i] = true;
-        num.push(numbers[i]);
-        nPr(cnt + 1, target, numbers, v, num);
-        num.pop();
+        Permutation(cnt+1,target,num+numbers[i],numbers,v);
         v[i] = false;
     }
 }
-let isPrime = (num) => {
-    let isNot = new Array(num + 1).fill(false);
-    isNot[0] = true;
-    isNot[1] = true;
 
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-
-        if (isNot[i]) continue;
-
-        for (let j = i + i; j <= num; j += i) {
+function isPrime(number){
+    if(number == 0 || number == 1) return false;
+    
+    let isNot = new Array(number+1).fill(false);
+    
+    for(let i=2;i<=Math.sqrt(number);i++){
+        if(isNot[i]) continue;
+        
+        for(let j=i+i;j<=number;j+=i){
             isNot[j] = true;
         }
-
     }
-
-    if (isNot[num]) return false;
-    return true;
+    
+    return !isNot[number];
 }
