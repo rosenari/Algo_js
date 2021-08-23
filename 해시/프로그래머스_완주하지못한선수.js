@@ -1,18 +1,16 @@
-//프로그래머스 LEVEL1
+//level1
 
 function solution(participant, completion) {
-    var answer = '';
-    let map = [];
-    completion.forEach((v) => {
-        if (!map[v]) map[v] = 1;
-        else map[v] += 1;
-    })
-
-    participant.forEach((v) => {
-        if (!map[v]) answer = v;
-        else map[v] -= 1;
+    let answer = 'nothing';
+    const map = new Map();
+    completion.forEach(human => map.set(human, (map.get(human) || 0) + 1));
+    participant.forEach(human => {
+        const num = map.get(human) || 0;
+        if(!num){
+            answer = human;
+            return false;
+        }
+        map.set(human, num - 1);
     });
-
-
     return answer;
 }
