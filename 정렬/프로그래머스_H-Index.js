@@ -1,19 +1,12 @@
-//프로그래머스 LEVEL2
 function solution(citations) {
-    var answer = 0;
-    citations.sort((a, b) => a - b);
-    for (let i = citations[citations.length - 1]; i >= 0; i--) {
-        let gt = 0;
-        for (let j = 0; j < citations.length; j++) {
-            if (citations[j] >= i) {
-                gt++;
-            }
+    citations.sort((a, b) => b - a);
+    for (let h = citations[0]; h >= 0; h--){
+        let k = 0;
+        for(const citation of citations){
+            if(citation >= h) k++;
         }
-        if (gt >= i && citations.length - gt <= i) {
-            answer = i;
-            break;
+        if(k >= h){
+            return h;
         }
     }
-
-    return answer;
 }
