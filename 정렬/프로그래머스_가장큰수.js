@@ -1,9 +1,4 @@
 function solution(numbers) {
-    numbers.sort((a,b) => {
-        return (b+''+a) - (a+''+b);
-    })
-    
-    if(numbers[0]=="0") return "0";
-    
-    return numbers.join("");
+    const answer = numbers.sort((a, b) => ('' + b + a) - ('' + a + b)).join('');
+    return parseInt(answer) === 0 ? '0' : answer;
 }
