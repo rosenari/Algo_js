@@ -1,12 +1,11 @@
 //프로그래머스 LEVEL1
 function solution(array, commands) {
-    var answer = [];
-
-    commands.forEach((arr) => {
-        let temp = array.slice(arr[0] - 1, arr[1]);
-        temp.sort((a, b) => a - b);
-        answer.push(temp[arr[2] - 1]);
+    const answer = [];
+    commands.map(command => {
+        const i = command[0] - 1;
+        const j = command[1];
+        const k = command[2] - 1;
+        answer.push(array.slice(i, j).sort((a, b) => a - b)[k]);
     });
-
     return answer;
 }
