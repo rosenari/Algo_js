@@ -1,45 +1,40 @@
-let sets = new Set();
-let map = {};
+const already = new Set();
 function solution(numbers) {
-    let N = numbers.length;
-    let v = new Array(N);
-    numbers = numbers.split("");
+    const answer = new Set();
+    const N = numbers.length;
+    const v = new Array(numbers.length).fill(false);
     for(let i=1;i<=N;i++){
         v.fill(false);
-        Permutation(0,i,"",numbers,v);
+        nPr(answer, i, new Array(i), numbers, v, 0);
     }
-    return sets.size;
+    return answer.size;
 }
-
-function Permutation(cnt,target,num,numbers,v){
-    if(cnt==target){
-        if(!map[parseInt(num)]) map[parseInt(num)] = true;
-        else return;
-            
-        if(isPrime(parseInt(num))) sets.add(parseInt(num));
+function nPr(answer, r, space, numbers, v, cnt){
+    if(cnt === r){
+        const prime = parseInt(space.join(''));
+        if(already.has(prime)) return;
+        if(isPrime(prime)) answer.add(prime);
+        already.add(prime);
         return;
     }
     
     for(let i=0;i<numbers.length;i++){
         if(v[i]) continue;
         v[i] = true;
-        Permutation(cnt+1,target,num+numbers[i],numbers,v);
+        space[cnt] = numbers[i];
+        nPr(answer, r, space, numbers, v, cnt + 1);
         v[i] = false;
     }
 }
 
 function isPrime(number){
-    if(number == 0 || number == 1) return false;
-    
-    let isNot = new Array(number+1).fill(false);
-    
-    for(let i=2;i<=Math.sqrt(number);i++){
+    if(number === 0 || number === 1) return false;
+    const isNot = new Array(number + 1).fill(false);
+    for(let i = 2; i <= Math.sqrt(number); i++) {
         if(isNot[i]) continue;
-        
-        for(let j=i+i;j<=number;j+=i){
+        for(let j = i + i;j <= number; j+=i) {
             isNot[j] = true;
         }
     }
-    
     return !isNot[number];
 }
