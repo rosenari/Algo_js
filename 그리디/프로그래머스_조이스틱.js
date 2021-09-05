@@ -1,61 +1,39 @@
-//프로그래머스 LEVEL2
-
-let testCase = "ABAAAAABAB";
-
 function solution(name) {
-    var answer = 0;
-
-    arr = Array.from(name);
-    v = new Array(arr.length).fill(false);
-
-    while (!check(v, arr)) {
-        answer += BFS();
+    const N = name.length;
+    let answer = 0, index = 0, offset = 0;
+    name = Array.from(name);
+    while(true){
+        const result = BFS(index, name, new Array(N).fill(false), N);
+        if(!result) break;
+        
+        [index, offset] = result;
+        answer += offset;
     }
-
-
     return answer;
 }
 
-let context = 0;
-let arr = [];
-let BFS = () => {
-    let cnt = 0;
-    let queue = [];
-    queue.push([context, 1, 0]);
-    queue.push([context, -1, 0]);
-
-    while (queue.length > 0) {
-        let data = queue.shift();
-        let index = data[0];
-        if (!v[index] && arr[index] !== "A") {
-            cnt += data[2];
-            let a = Math.abs(arr[index].charCodeAt(0) - "A".charCodeAt(0));
-            let b = Math.abs(26 - (arr[index].charCodeAt(0) - "A".charCodeAt(0)));
-            if (a < b) cnt += a;
-            else cnt += b;
-            context = index;
-            v[index] = true;
-            break;
-        }
-
-        let sum = (index + data[1]);
-        if (sum < 0) sum += arr.length;
-        sum %= arr.length;
-        queue.push([sum, data[1], data[2] + 1]);
-    }
-
-    return cnt;
-}
-
-let v = [];
-let check = (v, arr) => {
-    for (let i = 0; i < v.length; i++) {
-        if (!v[i] && arr[i] !== "A") {
-            return false;
+function BFS(startIndex, name, v, N){
+    const queue = [];
+    v[startIndex] = true;
+    queue.push([startIndex, 0]);
+    while(queue.length > 0){
+        const [index, offset] = queue.shift();
+        if(name[index] === 'A'){
+            if(!v[(index + 1) % N]){
+                v[(index + 1) % N] = true;
+                queue.push([(index + 1) % N, offset + 1]);
+            }
+            if(!v[index - 1 < 0 ? N - 1 : index - 1]){
+                v[index - 1 < 0 ? N - 1 : index - 1] = true;
+                queue.push([index - 1 < 0 ? N - 1 : index - 1, offset + 1]);
+            }
+        }else{
+            const charDiff = Math.min(Math.abs(name[index].charCodeAt(0) - 'A'.charCodeAt(0)),
+                                     Math.abs('Z'.charCodeAt(0) - name[index].charCodeAt(0) + 1));
+            name[index] = 'A';
+            return [index, offset + charDiff];
         }
     }
-
-    return true;
+    
+    return null;
 }
-
-console.log(solution(testCase));
