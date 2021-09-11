@@ -1,23 +1,18 @@
 function solution(n, computers) {
-    var answer = 0;
-
-    visited = new Array(n).fill(false);
-    for (let i in computers) {
-        if (visited[i]) continue;
-        DFS(i, computers);
-        answer++;
+    let answer = 0;
+    const v = Array.from({length:n}).fill(false);
+    for(const s in computers){
+        if(!v[s]){
+            DFS(s, computers, n, v);
+            answer++;
+        }
     }
-
     return answer;
 }
 
-let visited;
-let DFS = (n, computers) => {
-    visited[n] = true;
-
-    for (let i in computers[n]) {
-        if (visited[i] || computers[n][i] !== 1) continue;
-        DFS(i, computers);
+function DFS(num, computers, n, v){
+    v[num] = true;        
+    for(const linkNum in computers[num]){
+        if(!v[linkNum] && computers[num][linkNum]) DFS(linkNum, computers, n, v);
     }
-
 }
