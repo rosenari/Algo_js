@@ -1,23 +1,16 @@
+let answer = 0;
 function solution(numbers, target) {
-    answer = 0;
-
-    powerset(numbers, target, 0, 0);
-
+    const N = numbers.length;
+    powerSet(0, 0, N, numbers, target);
     return answer;
 }
 
-let answer = 0;
-
-let powerset = (numbers, target, cnt, result) => {
-    if (cnt == numbers.length) {
-        if (result == target) {
-            answer++;
-        }
-
+function powerSet(cnt, sum, N, numbers, target){
+    if(cnt === N){
+        if(sum === target) answer++;
+            
         return;
     }
-
-    powerset(numbers, target, cnt + 1, result + numbers[cnt]);
-    powerset(numbers, target, cnt + 1, result - numbers[cnt]);
-
+    powerSet(cnt + 1, sum + numbers[cnt], N, numbers, target);
+    powerSet(cnt + 1, sum - numbers[cnt], N, numbers, target);
 }
