@@ -21,7 +21,6 @@ function DFS(cnt, begin, target, words, v){
     }
 }
 
-function diff(begin, word){
-    const cword = word.split('');
-    return (begin.split('').filter((v,i) => v !== cword[i]).length) === 1;
+function diff(word, target){
+    return (Array.from(word).filter((v,i) => v !== target[i]).length) === 1;
 }
