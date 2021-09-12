@@ -1,37 +1,27 @@
+let min = Infinity;
 function solution(begin, target, words) {
-    v = new Array(words.length).fill(false);
-    DFS(begin, target, words, 0);
-
-    if (answer == 987654321) answer = 0;
-    return answer;
+    const v = Array.from({length: words.length}).fill(false);
+    DFS(0, begin, target, words, v);    
+    return min !== Infinity ? min : 0;
 }
-let answer = 987654321;
-let v;
-let DFS = (word, target, words, cnt) => {
-    if (word == target) {
-        answer = Math.min(answer, cnt);
-    }
 
-    for (let i in words) {
-        if (!v[i] && isChange(word, words[i])) {
+function DFS(cnt, begin, target, words, v){
+    if(begin === target) {
+        min = Math.min(min, cnt);
+        return;
+    }
+    
+    for(let i in words){
+        const word = words[i];
+        if(!v[i] && diff(begin, word)){
             v[i] = true;
-            DFS(words[i], target, words, cnt + 1);
+            DFS(cnt + 1, word, target, words, v);
             v[i] = false;
         }
     }
-
 }
-let isChange = (word, target) => {
-    let arr = Array.from(word);
-    let arr2 = Array.from(target);
 
-    let cnt = 0;
-
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] != arr2[i]) cnt++;
-    }
-
-    if (cnt == 1) return true;
-
-    return false;
+function diff(begin, word){
+    const cword = word.split('');
+    return (begin.split('').filter((v,i) => v !== cword[i]).length) === 1;
 }
