@@ -1,34 +1,31 @@
-//level 3
 function solution(genres, plays) {
-    const map = new Map();
-    return plays.map((play, index) => {
-        const genre = genres[index];
-        map.set(genre, (map.get(genre) || 0) + play);
+    const answer = [];
+    const gplays = new Map();
+    let songs = genres.map((genre, id) => {
+        gplays.set(genre, (gplays.get(genre) || 0) + plays[id]);    
         return {
-            play,
-            index,
-            genre
-        };
-    }).sort((a, b) => {
-        const genreA = map.get(a.genre);
-        const genreB = map.get(b.genre);
-        if(genreA > genreB){
-            return -1;
-        }else if(genreA < genreB){
-            return 1;
-        }else{
-            if(a.play > b.play){
-                return -1;
-            }else if(a.play < b.play){
-                return 1;
-            }else{
-                return a.index - b.index;
-            }
+            id,
+            genre,
+            play: plays[id]
         }
-    }).reduce((answer, plays) => {
-        const { genre, index } = plays;
-        if(answer.filter(plays => plays.genre === genre).length == 2) return answer;
-        answer.push({ genre, index });
-        return answer;
-    }, []).map(plays => plays.index);
+    });
+    songs = songs.map(song => {
+        return {
+            ...song,
+            gplay : gplays.get(song.genre)
+        }
+    });
+    songs.sort((a,b) => {
+        if(b.gplay == a.gplay){
+            if(b.play == a.play){
+                return a.id - b.id;
+            }
+            return b.play - a.play;
+        }
+        return b.gplay - a.gplay;
+    });
+    songs.forEach(song => {
+        if((answer.filter(v => v.genre===song.genre).length) < 2) answer.push(song);
+    });
+    return answer.map(v => v.id);
 }
