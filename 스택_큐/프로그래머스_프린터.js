@@ -1,15 +1,12 @@
-//프로그래머스 LEVEL2
-
 function solution(priorities, location) {
-    let answer = 1;
-    priorities = priorities.map((priority, index) => [priority, index]);
-    while(priorities.length > 0) {
-        const current = priorities.shift();
-        if(priorities.find(priority => current[0] < priority[0])){
-            priorities.push(current);
-        }else{
-            if(current[1] === location) break;
+    let answer = 0;
+    const queue = priorities.map((p,i) => ({ p, i }));
+    while(queue.length > 0){
+        const { p, i } = queue.shift();
+        if(queue.filter(v => v.p > p).length > 0) queue.push({ p, i });
+        else{
             answer++;
+            if(i == location) break;
         }
     }
     return answer;
