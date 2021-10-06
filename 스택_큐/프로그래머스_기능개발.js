@@ -1,9 +1,12 @@
 function solution(progresses, speeds) {
     const answer = [];
-    progresses.reduce((max, progress, index) => { 
-        const remain = Math.ceil((100 - progress) / speeds[index]);
-        if((max < remain) && answer.push(1)) return remain;
-        answer[answer.length - 1] += 1; return max;
-    }, -1);
-    return answer;
+    progresses.forEach((p,i) => {
+        const deplay = Math.ceil((100 - p) / speeds[i]);
+        if(answer.length == 0) answer.push({ deplay ,cnt: 1 });
+        else{
+            if(answer[answer.length - 1].deplay >= deplay) answer[answer.length - 1].cnt += 1;
+            else answer.push({ deplay ,cnt: 1 });
+        }
+    });
+    return answer.map(v => v.cnt);
 }
