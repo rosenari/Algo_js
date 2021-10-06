@@ -8,7 +8,7 @@
 |1| 완전하지못한선수 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42576 "link") | 프로그래머스 | 🏁 |
 |2| 위장 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42578 "link") | 프로그래머스 | 🏁 |
 |3| 베스트앨범 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42579 "link") | 프로그래머스 | 🏁 |
-|4| 기능개발 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42586 "link") | 프로그래머스 |   |
+|4| 기능개발 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42586 "link") | 프로그래머스 | 🏁 |
 |5| 프린터 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42587 "link") | 프로그래머스 |   |
 |6| 다리를지나는트럭 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42583 "link") | 프로그래머스 |   |
 |7| 디스크컨트롤러 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42627 "link") | 프로그래머스 |   |
