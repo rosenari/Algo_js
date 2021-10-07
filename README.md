@@ -17,7 +17,7 @@
 |10| 가장큰수 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42746 "link") | 프로그래머스 | 🏁 |
 |11| H-Index | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42747 "link") | 프로그래머스 | 🏁 |
 |12| 모의고사 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42840 "link") | 프로그래머스 | 🏁 |
-|13| 소수찾기 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42839 "link") | 프로그래머스 |   |
+|13| 소수찾기 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42839 "link") | 프로그래머스 | 🏁 |
 |14| <strong>카펫</strong> | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42842 "link") | 프로그래머스 |   |
 |15| 체육복 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42862 "link") | 프로그래머스 |   |
 |16| <strong>조이스틱</strong> | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/42860 "link") | 프로그래머스 |   |
