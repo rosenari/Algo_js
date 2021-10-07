@@ -1,11 +1,11 @@
 function solution(answers) {
-    const soopojas = [[1,2,3,4,5],[2,1,2,3,2,4,2,5],[3,3,1,1,2,2,4,4,5,5]]
-    .map((v, index) => ({ pattern: v, correct: 0, index: index + 1 }));
-    answers.map((answer, index) => {
-        soopojas.forEach(soopoja => {
-            if(answer === soopoja.pattern[index % soopoja.pattern.length]) soopoja.correct += 1;
+    const humans = [[1,2,3,4,5],[2,1,2,3,2,4,2,5],[3,3,1,1,2,2,4,4,5,5]]
+    .map((v, id) => ({ pattern: v, id: id + 1, matchCnt: 0}));
+    answers.forEach((answer, i) => {
+        humans.forEach(h => {
+            if(h.pattern[i%h.pattern.length]===answer) h.matchCnt += 1;
         });
     });
-    const max = Math.max(...[...soopojas].map(soopoja => soopoja.correct));
-    return soopojas.filter(soopoja => soopoja.correct === max).map(v => v.index);
+    const max = Math.max(...humans.map(h => h.matchCnt));
+    return humans.filter(h => h.matchCnt === max).map(h => h.id);
 }
