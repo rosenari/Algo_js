@@ -1,40 +1,38 @@
-const already = new Set();
+const prime = new Set();
+const nums = new Set();
 function solution(numbers) {
-    const answer = new Set();
-    const N = numbers.length;
-    const v = new Array(numbers.length).fill(false);
-    for(let i=1;i<=N;i++){
-        v.fill(false);
-        nPr(answer, i, new Array(i), numbers, v, 0);
-    }
-    return answer.size;
+    Array.from({length:numbers.length})
+        .forEach((_, i) => nPr('', i + 1, 0, numbers, new Array(numbers.length).fill(false)));
+    return prime.size;
 }
-function nPr(answer, r, space, numbers, v, cnt){
-    if(cnt === r){
-        const prime = parseInt(space.join(''));
-        if(already.has(prime)) return;
-        if(isPrime(prime)) answer.add(prime);
-        already.add(prime);
+
+function nPr(sum, r, cnt, numbers, v){
+    if(cnt == r){
+        const num = parseInt(sum);
+        if(nums.has(num)) return;
+        if(isPrime(num)) prime.add(num);
+        nums.add(num);
         return;
     }
     
-    for(let i=0;i<numbers.length;i++){
+    for(const i in numbers){
         if(v[i]) continue;
         v[i] = true;
-        space[cnt] = numbers[i];
-        nPr(answer, r, space, numbers, v, cnt + 1);
+        nPr(sum + numbers[i], r, cnt + 1, numbers, v);
         v[i] = false;
     }
 }
 
-function isPrime(number){
-    if(number === 0 || number === 1) return false;
-    const isNot = new Array(number + 1).fill(false);
-    for(let i = 2; i <= Math.sqrt(number); i++) {
+function isPrime(num){
+    const isNot = new Array(num + 1).fill(false);
+    Array.from({length:2}).forEach((_, i) => isNot[i] = true);
+    
+    for(let i=2;i<=Math.sqrt(num);i++){
         if(isNot[i]) continue;
-        for(let j = i + i;j <= number; j+=i) {
+        for(let j = i + i; j <= num; j += i){
             isNot[j] = true;
         }
     }
-    return !isNot[number];
+    
+    return !isNot[num];
 }
