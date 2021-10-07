@@ -1,9 +1,10 @@
 function solution(brown, yellow) {
-    let height = parseInt(brown / 2);
-    while(height-- >= 0){
-        const sum = brown + yellow;
-        if(sum % height !== 0) continue;
-        const width = parseInt(sum / height);
-        if(width >= height && ((width - 2) * (height - 2)) === yellow) return [width, height]; //(width - 2) * (height - 2)가 yellow 격자의 개수임도 확인해야함.
+    for(let w = 3; w <= 5000; w++){
+        for(let h = w; h >= 3; h--){
+            if(w * h == brown + yellow && (w - 2) * (h - 2) == yellow){
+               return [w, h];
+            }
+        }
     }
+    return [];
 }
