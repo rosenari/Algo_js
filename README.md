@@ -32,3 +32,4 @@
 |25| 여행경로 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/43164 "link") | 프로그래머스 |   |
 |26| <strong>입국심사</strong> | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/43238 "link") | 프로그래머스 |   |
 |27| 가장먼노드 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/49189 "link") | 프로그래머스 |   |
+|28| 보석쇼핑 | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/67258 "link") | 프로그래머스 |  |
