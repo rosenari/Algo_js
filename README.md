@@ -34,3 +34,4 @@
 |27| <strong>가장먼노드</strong> | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/49189 "link") | 프로그래머스 | 🏁 |
 |28| <strong>보석쇼핑</strong> | [바로가기](https://programmers.co.kr/learn/courses/30/lessons/67258 "link") | 프로그래머스 | 🏁 |
 |29| <strong>폰켓몬</strong> | [바로가기](https://school.programmers.co.kr/learn/courses/30/lessons/1845 "link") | 프로그래머스 | 🏁 |
+|30| <strong>피로도</strong> | [바로가기](https://school.programmers.co.kr/learn/courses/30/lessons/87946 "link") | 프로그래머스 | 🏁 |
