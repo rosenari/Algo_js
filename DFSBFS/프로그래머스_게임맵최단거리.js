@@ -1,37 +1,40 @@
 function solution(maps) {
-    return BFS(maps);
+    const start = [0, 0, 1];
+    const end = [maps.length - 1, maps[0].length - 1];
+    const v = new Array(maps.length);
+    for (let i = 0; i < v.length; i++) {
+        v[i] = new Array(maps[i].length).fill(false);
+    }
+    
+    return bfs(start, end, v, maps);
 }
 
-let dr = [0,-1,0,1];
-let dc = [-1,0,1,0];
-
-function BFS(maps){
-    let w = maps[0].length - 1;
-    let h = maps.length - 1;
-    let v = new Array(maps.length);
-    
-    for(let i=0;i<v.length;i++) v[i] = new Array(maps[0].length).fill(false);
-    
-    let queue = [[0,0,1]];
+const dr = [0, -1, 0, 1];
+const dc = [-1, 0, 1, 0];
+function bfs(start, end, v, maps) {
+    let result = -1;
+    const queue = [start];
     v[0][0] = true;
     
-    while(queue.length > 0){
-        let pos = queue.shift();
-        let r = pos[0];
-        let c = pos[1];
-        if(r==h && c==w){
-            return pos[2];
+    while(queue.length > 0) {
+        const current = queue.shift();
+        
+        if(current[0] == end[0] && current[1] == end[1]) {
+            return current[2];
         }
         
-        for(let i=0;i<dr.length;i++){
-            let nr = r+dr[i];
-            let nc = c+dc[i];
-            if(nr < 0 || nr > h || nc < 0 || nc > w || v[nr][nc] || maps[nr][nc]==0) continue;
+        for (let i = 0; i < 4 ;i ++) {
+            const nr = current[0] + dr[i];
+            const nc = current[1] + dc[i];
+            
+            if (nr < 0 || nc < 0 || nr > end[0] || nc > end[1] || v[nr][nc] || maps[nr][nc] == 0) {
+                continue;
+            }
             
             v[nr][nc] = true;
-            queue.push([nr,nc,pos[2]+1]);
+            queue.push([nr, nc, current[2] + 1]);
         }
     }
     
-    return -1;
+    return result;
 }
