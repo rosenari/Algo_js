@@ -1,22 +1,19 @@
 let answer = 0;
 function solution(k, dungeons) {
-    const N = dungeons.length;
-    const visited = Array.from({length: N}).fill(false);
-    nPr(k, N, 0, dungeons, visited);
+    const v = new Array(dungeons.length).fill(false);
+    Permutation(v, k, dungeons, 0);
     return answer;
 }
 
-function nPr(k, N, start, dungeons, visited) {
-    answer = Math.max(answer, start);
-    if(start === N) {
-       return; 
-    }
+function Permutation(v, energe, dungeons, clear) {
+    if (answer <= clear) answer = clear;
     
-    for(let i=0; i<N; i++) {
-        if(visited[i]) continue;
-        visited[i] = true;
-        const [minEnerge, consumeEnerge] = dungeons[i];
-        if(k >= minEnerge) nPr(k - consumeEnerge, N, start + 1, dungeons, visited);
-        visited[i] = false;
+    for (let i = 0; i < dungeons.length; i++) {
+        const [min, spend] = dungeons[i];
+        if (!v[i] && energe >= min) {
+            v[i] = true;
+            Permutation(v, energe - spend, dungeons, clear + 1);
+            v[i] = false;
+        }
     }
 }
