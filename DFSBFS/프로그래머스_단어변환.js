@@ -1,26 +1,29 @@
-let min = Infinity;
+let answer = Infinity;
 function solution(begin, target, words) {
-    const v = Array.from({length: words.length}).fill(false);
-    DFS(0, begin, target, words, v);    
-    return min !== Infinity ? min : 0;
+    const v = Array(words.length).fill(false);
+    dfs(begin, target, v, words, 0);
+    
+    return answer === Infinity ? 0 : answer;
 }
 
-function DFS(cnt, begin, target, words, v){
-    if(begin === target) {
-        min = Math.min(min, cnt);
+function dfs(begin, target, v, words, count) {
+    if (count >= answer) return;
+    
+    if (begin === target) {
+        answer = count;
         return;
     }
     
-    for(let i in words){
+    for (let i = 0 ; i < words.length; i++) {
         const word = words[i];
-        if(!v[i] && diff(begin, word)){
+        if (!v[i] && diff_count(begin, word) === 1) {
             v[i] = true;
-            DFS(cnt + 1, word, target, words, v);
+            dfs(word, target, v, words, count + 1);
             v[i] = false;
         }
     }
 }
 
-function diff(word, target){
-    return (Array.from(word).filter((v,i) => v !== target[i]).length) === 1;
+function diff_count(begin, target) {
+    return Array.from(begin).filter((v, i) => v !== target[i]).length;
 }
